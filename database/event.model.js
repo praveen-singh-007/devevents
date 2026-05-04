@@ -51,6 +51,7 @@ const EventSchema = new Schema(
     mode: {
       type: String,
       enum: ["online", "offline", "hybrid"],
+      lowercase: true,
       required: true,
     },
 
@@ -80,7 +81,7 @@ const EventSchema = new Schema(
 );
 
 // Generate slug before saving
-EventSchema.pre("save", function (next) {
+EventSchema.pre("save", async function () {
   if (this.title) {
     this.slug = this.title
       .toLowerCase()
@@ -89,7 +90,12 @@ EventSchema.pre("save", function (next) {
       .replace(/\s+/g, "-");
   }
 
-  next();
+  // normalize date
+  if (this.date) {
+    this.date = new Date(this.date)
+      .toISOString()
+      .split("T")[0];
+  }
 });
 
 const Event =

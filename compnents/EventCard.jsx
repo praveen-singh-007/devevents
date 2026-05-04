@@ -1,14 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const EventCard = ({
-  title,
-  image,
-  slug,
-  location,
-  date,
-  time,
-}) => {
+
+const EventCard = ({title, image, slug, location, date, time}) => {
   return (
     <Link href={`/events/${slug}`} id="event-card">
       <Image

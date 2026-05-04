@@ -3,7 +3,15 @@ import ExploreBtn from "../compnents/ExploreBtn";
 import EventCard from "../compnents/EventCard";
 import events from "@/lib/constants";
 
-export default function Home() {
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
+export default async function Home() {
+
+  const response = await fetch(`${BASE_URL}/api/events`)
+
+  const events = await response.json()
+ 
   return (
     
     <section>
@@ -18,7 +26,7 @@ export default function Home() {
         <h3>Featured Events</h3>
           <ul className = 'events list-none'>
 
-            {events.map((event)=>{
+            {events && events.length > 0 && events.map((event)=>{
               return <li key = {event.title}><EventCard {...event}/></li>
             })}
 
