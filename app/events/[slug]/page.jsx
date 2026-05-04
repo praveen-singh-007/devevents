@@ -22,7 +22,7 @@ const EventDetails = async ({ params }) => {
   }
 
   const similarEvents = await getSimilarEventsBySlug(slug);
-  console.log(similarEvents);
+
   return (
 <section id="event">
   <div className="header">
@@ -122,7 +122,7 @@ const EventDetails = async ({ params }) => {
     </div>
     </div>
 
-    <BookingsForm />
+    <BookingsForm eventId={event._id} slug = {event.slug}/>
     
   </div>
   <div class="flex w-full flex-col gap-4 pt-20">

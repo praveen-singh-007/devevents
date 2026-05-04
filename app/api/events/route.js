@@ -40,7 +40,7 @@ export async function POST(req){
         return NextResponse.json(createdEvent, { status: 201 });
 
     }catch(error){
-        console.error("Error creating event:", error);
+
         return NextResponse.json(
   {
     error: error.message,
@@ -60,7 +60,7 @@ export async function GET(req){
 
         return NextResponse.json(events, { status: 200 });
     } catch (error) {
-        console.error("Error fetching events:", error);
+
         return NextResponse.json(
             {
                 error: error.message,

@@ -21,22 +21,18 @@ const BookingSchema = new Schema(
   }
 );
 
-BookingSchema.pre("save", async function(next){
-    try{
-        const eventExists = await Event.findById(this.eventId);
+BookingSchema.pre("save", async function () {
+    const eventExists = await Event.findById(this.eventId);
 
-        if(!eventExists){
-            throw new Error("Event not found")
-        }
-
-        next();
+    if (!eventExists) {
+        throw new Error("Event not found");
     }
-    catch(error){
-        return next(error);
-    }
-})
+});
 
-BookingSchema.index({ eventId: 1, email: 1 }, { unique: true });
+BookingSchema.index(
+  { eventId: 1, email: 1 },
+  { unique: true }
+);
 
 const Booking =
   models.Booking || model("Booking", BookingSchema);
